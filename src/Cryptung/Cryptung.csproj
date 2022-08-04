@@ -1,9 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>ofcoursedude.$(AssemblyName)</PackageId>
+		<Authors>ofcoursedude</Authors>
+		<Description>Simple encryption/decryption library that returns encrypted base64 representation of a string.</Description>
+		<Copyright>MIT</Copyright>
+		<PackageProjectUrl>https://github.com/ofcoursedude/cryptung</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ofcoursedude/cryptung</RepositoryUrl>
+		<Product>ofcoursedude.$(AssemblyName)</Product>
+	</PropertyGroup>
 
 </Project>
