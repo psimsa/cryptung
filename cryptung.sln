@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6F1251DE-F24B-45BC-978E-6A34C5D73FCC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptung.Tests", "test\Cryptung.Tests\Cryptung.Tests.csproj", "{3978FD79-3137-4255-A25B-461C9CC509AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{03CB1554-606A-4E2C-9568-4954FEB7746C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptung", "src\Cryptung\Cryptung.csproj", "{FCFEAF17-CA5E-425F-9CDA-19CB42FD47C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptung.DependencyInjection", "src\Cryptung.DependencyInjection\Cryptung.DependencyInjection.csproj", "{A51E5606-A15B-40B3-8437-7822ECC5025E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3978FD79-3137-4255-A25B-461C9CC509AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3978FD79-3137-4255-A25B-461C9CC509AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3978FD79-3137-4255-A25B-461C9CC509AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3978FD79-3137-4255-A25B-461C9CC509AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCFEAF17-CA5E-425F-9CDA-19CB42FD47C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCFEAF17-CA5E-425F-9CDA-19CB42FD47C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCFEAF17-CA5E-425F-9CDA-19CB42FD47C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCFEAF17-CA5E-425F-9CDA-19CB42FD47C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A51E5606-A15B-40B3-8437-7822ECC5025E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A51E5606-A15B-40B3-8437-7822ECC5025E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A51E5606-A15B-40B3-8437-7822ECC5025E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A51E5606-A15B-40B3-8437-7822ECC5025E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3978FD79-3137-4255-A25B-461C9CC509AB} = {6F1251DE-F24B-45BC-978E-6A34C5D73FCC}
+		{FCFEAF17-CA5E-425F-9CDA-19CB42FD47C7} = {03CB1554-606A-4E2C-9568-4954FEB7746C}
+		{A51E5606-A15B-40B3-8437-7822ECC5025E} = {03CB1554-606A-4E2C-9568-4954FEB7746C}
+	EndGlobalSection
+EndGlobal
