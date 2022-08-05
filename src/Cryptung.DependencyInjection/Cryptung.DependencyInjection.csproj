@@ -9,8 +9,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
+		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<PackageId>ofcoursedude.$(AssemblyName)</PackageId>
 		<Authors>ofcoursedude</Authors>

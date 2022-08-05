@@ -1,9 +1,12 @@
-﻿namespace Cryptung;
+﻿using Cryptung;
 
-public static class CryptungServiceFactory
+namespace Cryptung
 {
-    public static ICryptungService Create(string encryptionKey)
+    public static class CryptungServiceFactory
     {
-        return new CryptungService(encryptionKey);
+        public static ICryptungService Create(string encryptionKey)
+        {
+            return new CryptungService(encryptionKey);
+        }
     }
 }

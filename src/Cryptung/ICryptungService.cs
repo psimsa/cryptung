@@ -1,8 +1,10 @@
-﻿namespace Cryptung;
-
-public interface ICryptungService
+﻿namespace Cryptung
 {
-    string Encrypt(string input);
-    string Decrypt(string input);
-    string Recrypt(string input, string oldKey);
+
+    public interface ICryptungService
+    {
+        string Encrypt(string input);
+        string Decrypt(string input);
+        string Recrypt(string input, string oldKey);
+    }
 }
