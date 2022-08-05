@@ -1,11 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'=='Debug'">
 		<ProjectReference Include="..\Cryptung\Cryptung.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(Configuration)'!='Debug'">
+		<PackageReference Include="ofcoursedude.Cryptung" Version="1.0.0" />
 	</ItemGroup>
 
 	<PropertyGroup>

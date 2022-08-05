@@ -25,3 +25,9 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Pack
+      run: dotnet pack -p:Version=1.0.0.${{github.run_number}} -o out/pack
+    - name: Push
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      run: dotnet nuget push out/pack/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
+
