@@ -1,11 +1,15 @@
-﻿namespace Cryptung.Tests;
+﻿using Xunit;
 
-public class CryptungServiceFactoryShould
+namespace Cryptung.Tests
 {
-    [Fact]
-    public void ReturnEncryptionService()
+
+    public class CryptungServiceFactoryShould
     {
-        var service = CryptungServiceFactory.Create("some key");
-        Assert.NotNull(service);
+        [Fact]
+        public void ReturnEncryptionService()
+        {
+            var service = CryptungServiceFactory.Create("some key");
+            Assert.NotNull(service);
+        }
     }
 }

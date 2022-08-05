@@ -1,104 +1,109 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 
-namespace Cryptung;
-
-internal class CryptungService : ICryptungService
+namespace Cryptung
 {
-    private readonly byte[] _encryptionKey;
-
-    internal CryptungService(string encryptionKey)
+    internal class CryptungService : ICryptungService
     {
-        using var sha = SHA256.Create();
-        _encryptionKey = GetHash(sha, encryptionKey);
-    }
+        private readonly byte[] _encryptionKey;
 
-    public string Encrypt(string input)
-    {
-        var (iv, encryptor) = GetEncryptor();
-        var inputData = Encoding.UTF8.GetBytes(input);
-        var encryptedInput = Process(inputData, encryptor);
-        var encryptionObject = new CryptungObject()
+        internal CryptungService(string encryptionKey)
         {
-            IV = iv,
-            Value = encryptedInput
-        };
-        return encryptionObject.ToBase64();
+            using var sha = SHA256.Create();
+            _encryptionKey = GetHash(sha, encryptionKey);
+        }
+
+        public string Encrypt(string input)
+        {
+            var (iv, encryptor) = GetEncryptor();
+            var inputData = Encoding.UTF8.GetBytes(input);
+            var encryptedInput = Process(inputData, encryptor);
+            var encryptionObject = new CryptungObject(iv, encryptedInput);
+            return encryptionObject.ToBase64();
+        }
+
+        public string Decrypt(string input)
+        {
+            var encryptionObject = CryptungObject.FromBase64(input);
+            var decryptor = GetDecryptor(encryptionObject._iv);
+            var decryptedInput = Process(encryptionObject._value, decryptor);
+            return Encoding.UTF8.GetString(decryptedInput);
+        }
+
+        public string Recrypt(string input, string oldKey)
+        {
+            var oldKeyCryptungService = new CryptungService(oldKey);
+            var decryptedValue = oldKeyCryptungService.Decrypt(input);
+            return Encrypt(decryptedValue);
+        }
+
+        private static byte[] Process(byte[] inputData, ICryptoTransform transformer)
+        {
+            using var output = new MemoryStream();
+            using var cryptoStream = new CryptoStream(output, transformer, CryptoStreamMode.Write);
+            using var input = new MemoryStream(inputData);
+            input.CopyTo(cryptoStream);
+            cryptoStream.FlushFinalBlock();
+
+            return output.ToArray();
+        }
+
+        private Aes GetEncryptionProvider(byte[]? iv = null)
+        {
+            var enc = Aes.Create();
+            enc.Key = _encryptionKey;
+            if (iv != null)
+                enc.IV = iv;
+            return enc;
+        }
+
+        private (byte[] iv, ICryptoTransform) GetEncryptor()
+        {
+            var aes = GetEncryptionProvider();
+            return (aes.IV, aes.CreateEncryptor());
+        }
+
+        private ICryptoTransform GetDecryptor(byte[] iv)
+        {
+            var aes = GetEncryptionProvider(iv);
+            return aes.CreateDecryptor();
+        }
+
+        private static byte[] GetHash(HashAlgorithm hashAlgorithm, string input) =>
+            hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
     }
 
-    public string Decrypt(string input)
+    internal readonly struct CryptungObject
     {
-        var encryptionObject = CryptungObject.FromBase64(input);
-        var decryptor = GetDecryptor(encryptionObject.IV);
-        var decryptedInput = Process(encryptionObject.Value, decryptor);
-        return Encoding.UTF8.GetString(decryptedInput);
-    }
-    
-    public string Recrypt(string input, string oldKey)
-    {
-        var oldKeyCryptungService = new CryptungService(oldKey);
-        var decryptedValue = oldKeyCryptungService.Decrypt(input);
-        return Encrypt(decryptedValue);
-    }
+        internal byte[] _iv { get; }
+        internal byte[] _value { get; }
 
-    private static byte[] Process(byte[] inputData, ICryptoTransform transformer)
-    {
-        using var output = new MemoryStream();
-        using var cryptoStream = new CryptoStream(output, transformer, CryptoStreamMode.Write);
-        using var input = new MemoryStream(inputData);
-        input.CopyTo(cryptoStream);
-        cryptoStream.FlushFinalBlock();
+        public CryptungObject(byte[] iv, byte[] value)
+        {
+            _iv = iv;
+            _value = value;
+        }
 
-        return output.ToArray();
-    }
+        internal static CryptungObject FromBase64(string base64)
+        {
+            var bytes = Convert.FromBase64String(base64);
+            var iv = new byte[16];
+            var value = new byte[bytes.Length - 16];
 
-    private Aes GetEncryptionProvider(byte[]? iv = null)
-    {
-        var enc = Aes.Create();
-        enc.Key = _encryptionKey;
-        if (iv != null)
-            enc.IV = iv;
-        return enc;
-    }
+            Array.Copy(bytes, iv, 16);
+            Array.Copy(bytes, 16, value, 0, value.Length);
 
-    private (byte[] iv, ICryptoTransform) GetEncryptor()
-    {
-        var aes = GetEncryptionProvider();
-        return (aes.IV, aes.CreateEncryptor());
-    }
+            return new CryptungObject(iv, value);
+        }
 
-    private ICryptoTransform GetDecryptor(byte[] iv)
-    {
-        var aes = GetEncryptionProvider(iv);
-        return aes.CreateDecryptor();
-    }
-
-    private static byte[] GetHash(HashAlgorithm hashAlgorithm, string input) =>
-        hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
-}
-
-internal readonly struct CryptungObject
-{
-    internal byte[] IV { get; init; }
-    internal byte[] Value { get; init; }
-
-    internal static CryptungObject FromBase64(string base64)
-    {
-        var bytes = Convert.FromBase64String(base64);
-        var iv = new byte[16];
-        var value = new byte[bytes.Length - 16];
-
-        Array.Copy(bytes, iv, 16);
-        Array.Copy(bytes, 16, value, 0, value.Length);
-
-        return new CryptungObject { IV = iv, Value = value };
-    }
-
-    internal string ToBase64()
-    {
-        var bytes = new byte[IV.Length + Value.Length];
-        Array.Copy(IV, 0, bytes, 0, IV.Length);
-        Array.Copy(Value, 0, bytes, IV.Length, Value.Length);
-        return Convert.ToBase64String(bytes);
+        internal string ToBase64()
+        {
+            var bytes = new byte[_iv.Length + _value.Length];
+            Array.Copy(_iv, 0, bytes, 0, _iv.Length);
+            Array.Copy(_value, 0, bytes, _iv.Length, _value.Length);
+            return Convert.ToBase64String(bytes);
+        }
     }
 }
