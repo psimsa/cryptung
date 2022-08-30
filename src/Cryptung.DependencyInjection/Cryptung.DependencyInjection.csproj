@@ -8,7 +8,7 @@
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
 	</ItemGroup>
 	<ItemGroup Condition="'$(Configuration)'!='Debug'">
-		<PackageReference Include="ofcoursedude.Cryptung" Version="1.0.0.34" />
+		<PackageReference Include="ofcoursedude.Cryptung" Version="1.0.0.43" />
 	</ItemGroup>
 
 	<PropertyGroup>
