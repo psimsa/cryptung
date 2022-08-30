@@ -1,4 +1,4 @@
-﻿using Cryptung;
+using Cryptung;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cryptung.DependencyInjection

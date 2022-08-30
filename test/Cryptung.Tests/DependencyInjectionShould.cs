@@ -1,4 +1,4 @@
-﻿using Cryptung.DependencyInjection;
+using Cryptung.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
