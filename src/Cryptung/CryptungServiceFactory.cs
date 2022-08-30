@@ -1,4 +1,4 @@
-﻿using Cryptung;
+using Cryptung;
 
 namespace Cryptung
 {

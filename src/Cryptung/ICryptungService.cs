@@ -1,4 +1,4 @@
-﻿namespace Cryptung
+namespace Cryptung
 {
 
     public interface ICryptungService
