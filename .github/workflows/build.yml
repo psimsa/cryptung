@@ -17,9 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: |
-          3.1.x
-          5.0.x
           6.0.x
+          7.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -27,8 +26,12 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack -p:Version=1.0.0.${{github.run_number}} -o out/pack
+      run: dotnet pack -p:Version=2.0.0.${{github.run_number}} -o out/pack
     - name: Push
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/release' }}
       run: dotnet nuget push out/pack/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
-
+    - name: Upload Packages
+      uses: actions/upload-artifact@v3.1.1
+      with:
+        path: out/pack/*.nupkg
+        

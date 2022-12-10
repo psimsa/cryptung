@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+		<TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
 		<Nullable>enable</Nullable>
 		<PackageId>ofcoursedude.$(AssemblyName)</PackageId>
 		<Authors>ofcoursedude</Authors>
@@ -10,6 +10,7 @@
 		<PackageProjectUrl>https://github.com/ofcoursedude/cryptung</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ofcoursedude/cryptung</RepositoryUrl>
 		<Product>ofcoursedude.$(AssemblyName)</Product>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 </Project>
