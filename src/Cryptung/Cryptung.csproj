@@ -10,6 +10,7 @@
 		<PackageProjectUrl>https://github.com/ofcoursedude/cryptung</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ofcoursedude/cryptung</RepositoryUrl>
 		<Product>ofcoursedude.$(AssemblyName)</Product>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 </Project>

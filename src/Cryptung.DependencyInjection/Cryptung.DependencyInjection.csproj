@@ -1,27 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
-	<ItemGroup Condition="'$(Configuration)'=='Debug'">
-		<ProjectReference Include="..\Cryptung\Cryptung.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-	</ItemGroup>
-	<ItemGroup Condition="'$(Configuration)'!='Debug'">
-		<PackageReference Include="ofcoursedude.Cryptung" Version="1.0.0.43" />
-	</ItemGroup>
-
-	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
-		<Nullable>enable</Nullable>
-		<PackageId>ofcoursedude.$(AssemblyName)</PackageId>
-		<Authors>ofcoursedude</Authors>
-		<Description>Simple encryption/decryption library that returns encrypted base64 representation of a string.</Description>
-		<Copyright>MIT</Copyright>
-		<PackageProjectUrl>https://github.com/ofcoursedude/cryptung</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/ofcoursedude/cryptung</RepositoryUrl>
-		<Product>ofcoursedude.$(AssemblyName)</Product>
-
-	</PropertyGroup>
-
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
+        <Nullable>enable</Nullable>
+        <PackageId>ofcoursedude.$(AssemblyName)</PackageId>
+        <Authors>ofcoursedude</Authors>
+        <Description>Simple encryption/decryption library that returns encrypted base64 representation of a string.</Description>
+        <Copyright>MIT</Copyright>
+        <PackageProjectUrl>https://github.com/ofcoursedude/cryptung</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/ofcoursedude/cryptung</RepositoryUrl>
+        <Product>ofcoursedude.$(AssemblyName)</Product>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Cryptung\Cryptung.csproj"/>
+    </ItemGroup>
 </Project>
