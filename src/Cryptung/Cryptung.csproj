@@ -11,6 +11,11 @@
         <RepositoryUrl>https://github.com/psimsa/cryptung</RepositoryUrl>
         <Product>ofcoursedude.$(AssemblyName)</Product>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageReadmeFile>../../README.md</PackageReadmeFile>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../README.md" Pack="true" PackagePath=""/>
+    </ItemGroup>
 
 </Project>
