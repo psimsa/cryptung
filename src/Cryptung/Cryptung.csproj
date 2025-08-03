@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>netstandard2.1;net6.0;net7.0</TargetFrameworks>
-		<Nullable>enable</Nullable>
-		<PackageId>ofcoursedude.$(AssemblyName)</PackageId>
-		<Authors>Pavel Simsa</Authors>
-		<Description>Simple encryption/decryption library that returns encrypted base64 representation of a string.</Description>
-		<Copyright>MIT</Copyright>
-		<PackageProjectUrl>https://github.com/psimsa/cryptung</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/psimsa/cryptung</RepositoryUrl>
-		<Product>ofcoursedude.$(AssemblyName)</Product>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <PackageId>ofcoursedude.$(AssemblyName)</PackageId>
+        <Authors>Pavel Simsa</Authors>
+        <Description>Simple encryption/decryption library that returns encrypted base64 representation of a string.</Description>
+        <Copyright>MIT</Copyright>
+        <PackageProjectUrl>https://github.com/psimsa/cryptung</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/psimsa/cryptung</RepositoryUrl>
+        <Product>ofcoursedude.$(AssemblyName)</Product>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
 
 </Project>
