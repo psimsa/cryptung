@@ -10,7 +10,6 @@
         <RepositoryUrl>https://github.com/psimsa/cryptung</RepositoryUrl>
         <Product>ofcoursedude.$(AssemblyName)</Product>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageReadmeFile>$(MSBuildThisFileDirectory)../../README.md</PackageReadmeFile>
     </PropertyGroup>
     
     <ItemGroup>
