@@ -2,13 +2,12 @@ name: .NET
 
 on:
   push:
-    branches: [ "main", "release" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -16,22 +15,16 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: |
-          6.0.x
-          7.0.x
+        dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore -c Release
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal -c Release
     - name: Pack
       run: dotnet pack -p:Version=2.0.0.${{github.run_number}} -o out/pack
-    - name: Push
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/release' }}
-      run: dotnet nuget push out/pack/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
     - name: Upload Packages
       uses: actions/upload-artifact@v4.6.2
       with:
         path: out/pack/*.nupkg
-        
