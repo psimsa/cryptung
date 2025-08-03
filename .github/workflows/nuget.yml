@@ -18,10 +18,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore -c Release
+      run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal -c Release
+      run: dotnet test --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack -p:Version=${{ github.ref_name }} -o out/pack
+      run: dotnet pack -p:Version=${{ startsWith(github.ref, 'refs/tags/v') && replace(github.ref, 'refs/tags/v', '') || github.ref_name }} -o out/pack
     - name: Push to NuGet
       run: dotnet nuget push out/pack/*.nupkg -k ${{secrets.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
